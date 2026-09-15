@@ -1,0 +1,92 @@
+---
+title: "DWV Assignment 4"
+author: "Bryn Swiston"
+format: html
+editor: visual
+---
+
+```{r}
+library(readr)
+
+setwd("Documents/Data Wrangling Library/DWV Assignment 4 Swiston_files")
+
+your_data <- read_csv("~/Documents/Data Wrangling Library/DWV Assignment 4 Swiston_files/protected_lands.csv")
+```
+
+```{r}
+plot(NA, xlim = c(-20, 20), ylim = c(-20, 20),
+     xlab = "x", ylab = "y", main = "y = 4x + 3",
+     asp = 1)
+abline(h = 0, v = 0, col = "black")
+grid()
+abline(a = 3, b = 4, col = "Steelblue", lwd = 2.5, lty = "dashed")
+text(3, 17, "y = 4x + 3", col = "HotPink", font = 2)
+```
+
+```{r}
+protected_lands <- read_csv("Documents/Data Wrangling Library/DWV Assignment 4 Swiston_files/protected_lands.csv")
+```
+
+```{r}
+mean(protected_lands$protected_lands)
+sd(protected_lands$protected_lands)
+range(protected_lands$protected_lands)
+
+mean(protected_lands$gdp_percap)
+sd(protected_lands$gdp_percap)
+range(protected_lands$gdp_percap)
+
+mean(protected_lands$tot_gdp_bilions)
+sd(protected_lands$tot_gdp_bilions)
+range(protected_lands$tot_gdp_bilions)
+
+```
+
+```{r}
+plot(protected_lands$gdp_percap, protected_lands$protected_lands,
+     main = "Protected Lands vs. GDP per Capita",
+     xlab = "GDP per Capita",
+     ylab = "Protected Lands (% of Total Land Area)",
+     pch = 19)
+```
+
+```{r}
+plot(protected_lands$tot_gdp_bilions, protected_lands$protected_lands,
+     main = "Protected Lands vs. Total GDP",
+     xlab = "Total GDP (Bilions)",
+     ylab = "Protected Lands (% of Total Land Area)",
+     pch = 19)
+```
+
+```{r}
+model <- lm(protected_lands ~ gdp_percap, data = protected_lands)
+summary(model)
+```
+
+```{r}
+plot(protected_lands$gdp_percap, protected_lands$protected_lands,
+     main = "Protected Lands vs. GDP per Capita",
+     xlab = "GDP per Capita",
+     ylab = "Protected Lands (% of Total Land Area)",
+     pch = 19)
+
+model <- lm(protected_lands ~ gdp_percap, data = protected_lands)
+abline(model, col = "red", lwd = 2)
+```
+
+```{r}
+model2 <- lm(protected_lands ~ tot_gdp_bilions, data = protected_lands)
+summary(model2)
+```
+
+```{r}
+plot(protected_lands$tot_gdp_bilions, protected_lands$protected_lands,
+     main = "Protected Lands vs. Total GDP",
+     xlab = "Total GDP (Billions)",
+     ylab = "Protected Lands (% of Total Land Area)",
+     pch = 19)
+
+abline(model2, col = "red", lwd = 2)
+```
+
+\
